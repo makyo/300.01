@@ -22,9 +22,9 @@
 
 ### Applies to
 
-* panic
-  * Disorder
-  * State
+* Panic
+  * attack
+  * state
 
 ### Converted to ICD-10-CM
 
