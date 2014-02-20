@@ -12,6 +12,7 @@
     "less": "~1.6.3",
     "coffee-script": "~1.7.1",
     "backbone": "~1.1.1",
-    "jquery": "~2.1.0"
+    "jquery": "~2.1.0",
+    "docco": "~0.6.3"
   }
 }
