@@ -1,0 +1,11 @@
+{
+  "name": "300.01",
+  "version": "0.0.1",
+  "devDependencies": {
+    "underscore": "~1.6.0",
+    "uglify-js": "~2.4.12",
+    "d3": "~3.4.2",
+    "less": "~1.6.3",
+    "yui": "~3.14.1"
+  }
+}
