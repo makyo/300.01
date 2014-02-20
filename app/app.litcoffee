@@ -3,7 +3,7 @@
 
 ## 2013 ICD-9-CM Diagnosis Code 300.01
 
-### Panic disorder without agoraphopbia
+### Panic disorder without agoraphobia
 
 * Short description: panic dis w/o agoraphobia
 * ICD-9-CM 300.01 is a billable medical code that can be used to specify a diagnosis on a reimbursement claim.
@@ -28,7 +28,7 @@
 
 ### Converted to ICD-10-CM
 
-Convert to ICD-10-CM: 300.01 converts directly to:
+300.01 converts directly to:
 * 2014 ICD-10-CM [F41.0](http://www.icd10data.com/ICD10CM/Codes/F01-F99/F40-F48/F41-/F41.0) Panic disorder \[episodic paroxysmal anxiety\] without agoraphobia
 
 ### ICD-9-CM Volume 2 Index entries containing back-references to 300.01:
