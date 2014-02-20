@@ -8,21 +8,21 @@ class Game
     level.addToGame(this, @levels.length)
     @levels.push(level)
 
-  end: ->
-    @cost += @levels[@currentLevel].cost
-    @levels[@currentLevel].hide()
-    @levels[@currentLevel].destroy()
-    # show credits
-
   next: ->
     @currentLevel++
     @levels[@currentLevel].render()
     if @currentLevel > 0
-      prevLevel = @levels[@currentLevel - 1]
-      @cost += prevLevel.cost
-      prevLevel.hide()
-      prevLevel.destroy()
+      @finishLevel(@levels[@currentLevel - 1])
     @levels[@currentLevel].show()
+
+  end: ->
+    @finishLevel(@levels[@currentLevel])
+    # show credits
+
+  finishLevel: (level) ->
+    @cost += level.cost
+    level.hide()
+    level.destroy()
 
 class Level
   constructor: (@name, @cost) ->
