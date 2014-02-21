@@ -1,6 +1,10 @@
 300.01
 ======
 
+Generalized anxiety disorder and bipolar I disorder.
+
+    diagnosis = [ 300.01, 296.63 ]
+
 ## 2013 ICD-9-CM Diagnosis Code 300.01
 
 ### Panic disorder without agoraphobia
@@ -47,7 +51,15 @@
 * State
   * panic *300.01*
 
+    prescriptions =
+      fluoxetine: ['20mg', 'twice daily']
+      lorazepam: ['125mcg', 'four times daily']
+      alprazolam: ['0.5mg', 'as needed']
+      propanolol: ['20mg', 'as needed']
+
 ## Our game
+
+(describe the game)
 
     class Game
       constructor: ->
@@ -65,10 +77,12 @@
         if @currentLevel > 0
           @finishLevel(@levels[@currentLevel - 1])
         @levels[@currentLevel].show()
+        window.Overlay.setUrl("/docs/level#{ @currentLevel + 1 }.html")
 
       end: ->
         @finishLevel(@levels[@currentLevel])
-        # show credits
+        window.Overlay.setUrl('/docs/overlay.html')
+        window.Overlay.activate()
 
       finishLevel: (level) ->
         @cost += level.cost
@@ -76,6 +90,8 @@
         level.destroy()
 
 ## A level within the game
+
+(describe the stages of treatment, etc.)
 
     class Level
       constructor: (@name, @cost) ->
