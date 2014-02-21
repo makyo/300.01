@@ -1,6 +1,8 @@
+# Library JS files - should already be minified, so don't include them in uglify
 LIBRARIES = node_modules/d3/d3.min.js node_modules/jquery/dist/jquery.min.js node_modules/underscore/underscore-min.js node_modules/backbone/backbone-min.js
 
-FILES = src/app.js src/logo.js src/levels/level1.js
+# Specify these in the proper order.
+FILES = src/app.js src/logo.js src/overlay.js src/levels/level1.js
 
 dist: build
 	rm -rf dist
@@ -27,7 +29,7 @@ less: node_modules
 	node_modules/less/bin/lessc style.less > src/style.css
 
 docco: node_modules
-	node_modules/docco/bin/docco app/*.litcoffee app/levels/*.litcoffee
+	node_modules/docco/bin/docco --layout classic app/*.litcoffee app/levels/*.litcoffee
 
 node_modules:
 	npm install

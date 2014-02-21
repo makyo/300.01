@@ -4,6 +4,7 @@
     margin-right: auto;
     margin-top: 2em;
 }
+
 #logo {
     text {
         stroke: none;
@@ -14,5 +15,35 @@
     line {
         stroke: #fff;
         fill: none;
+    }
+}
+
+#overlay {
+    position: absolute;
+    top: 115px;
+    left: 10%;
+    border: 1px solid #aaa;
+    width: 80%;
+    height: 80%;
+    display: none;
+    &.active {
+        display: block;
+    }
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    .close {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: #888;
+        color: #fff;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
     }
 }

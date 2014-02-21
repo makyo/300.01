@@ -26,6 +26,10 @@ forward, all told.
         y: 75
       )
       .text('300.01')
+      .on('click', () ->
+        window.Overlay.setUrl('/docs/logo.html')
+        window.Overlay.activate()
+      )
 
 Logotype is neat and all, but add in some randomness (but just some).
 

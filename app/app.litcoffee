@@ -100,3 +100,6 @@ Make the Level class available outside this file for subclassing
 Create a new game and make it available to the browser - we can start it there.
 
     window.Game = new Game()
+
+    window.Overlay.setUrl('/docs/app.html')
+    window.Overlay.activate()
