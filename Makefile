@@ -2,7 +2,7 @@
 LIBRARIES = node_modules/d3/d3.min.js node_modules/jquery/dist/jquery.min.js node_modules/underscore/underscore-min.js node_modules/backbone/backbone-min.js
 
 # Specify these in the proper order.
-FILES = src/app.js src/logo.js src/overlay.js src/levels/level1.js
+FILES = src/logo.js src/overlay.js src/app.js src/levels/level1.js
 
 dist: build
 	rm -rf dist
