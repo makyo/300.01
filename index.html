@@ -5,6 +5,7 @@
         <link href='http://fonts.googleapis.com/css?family=Walter+Turncoat|Homemade+Apple|Indie+Flower' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css" />
         <!--devel:css-->
+        <link rel="stylesheet" type="text/css" href="/lib/chardinjs.css" />
         <link rel="stylesheet/less" type="text/css" href="/style.less" />
         <script type="text/javascript" src="/node_modules/less/dist/less-1.6.3.min.js"></script>
         <!--prod
@@ -13,17 +14,25 @@
         <!--/devel:css-->
     </head>
     <body>
-        <div class="pure-g-r" id="main">
+        <div class="pure-g" id="main">
             <div class="pure-u-1 pure-hidden-desktop">
                 Please view this on your desktop or in a wider screen :o)
             </div>
             <div class="pure-u-1 pure-hidden-phone pure-hidden-tablet" id="content">
-                <div class="pure-u-1">
+                <div class="pure-u-1-3">
                     <svg id="logo"></svg>
+                </div>
+                <div class="pure-u-15-24" id="header">
+                    <h2 id="title">An experiential game</h2>
+                    Cost: <span id="cost" data-intro="Cost" data-position="bottom">$0.00</span>
+                </div>
+                <div class="pure-u-1 level"> </div>
+                <div class="pure-u-1">
+                    <button id="complete-level">Complete Level</button>
                 </div>
             </div>
         </div>
-        <div id="overlay">
+        <div id="overlay" class="pure-hidden-phone pure-hidden-tablet">
             <div class="close">&#10005;</div>
             <iframe src="/docs/app.html"></iframe>
         </div>
@@ -32,8 +41,11 @@
         <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="/node_modules/underscore/underscore-min.js"></script>
         <script type="text/javascript" src="/node_modules/backbone/backbone-min.js"></script>
+        <script type="text/javascript" src="/lib/chardinjs.min.js"></script>
         <script type="text/javascript" src="/src/logo.js"></script>
         <script type="text/javascript" src="/src/overlay.js"></script>
+        <script type="text/javascript" src="/src/dispatcher.js"></script>
+        <script type="text/javascript" src="/src/cost.js"></script>
         <script type="text/javascript" src="/src/app.js"></script>
         <script type="text/javascript" src="/src/levels/level1.js"></script>
         <!--prod

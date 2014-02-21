@@ -20,10 +20,20 @@ forward, all told.
 
     logo = d3.select('#logo').append('g')
 
+    logo.append('rect')
+      .attr(
+        x: 0
+        y: 0
+        width: 275
+        height: 100
+        fill: '#fff'
+      )
+
     logo.append('text')
       .attr(
         x: 0
         y: 75
+        height: '100px'
       )
       .text('300.01')
       .on('click', () ->

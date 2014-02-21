@@ -37,8 +37,10 @@ and the story - should be told, even if only for my personal benefit.
 
       activate: () ->
         @el.addClass 'active'
+        window.dispatcher.trigger('overlayOpened')
 
       deactivate: () ->
         @el.removeClass 'active'
+        window.dispatcher.trigger('overlayClosed')
 
-    window.Overlay = new Overlay($('#overlay'))
+    window.overlay = new Overlay($('#overlay'))

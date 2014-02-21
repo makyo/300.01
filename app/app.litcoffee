@@ -79,7 +79,17 @@ written works and simple user interactions styled along the lines of a game.
       constructor: ->
         @currentLevel = -1
         @levels = []
-        @cost = 0
+        @cost = new window.Cost(
+          amount: 0
+          explanation: "None of this is free, you understand..."
+        )
+        @costView = new window.CostView(
+          el: '#cost'
+          model: @cost
+        )
+        $('#complete-level').click(_.bind(() ->
+          @levels[@currentLevel].complete()
+        , this))
 
       addLevel: (level) ->
         level.addToGame(this, @levels.length)
@@ -87,19 +97,26 @@ written works and simple user interactions styled along the lines of a game.
 
       next: ->
         @currentLevel++
-        @levels[@currentLevel].render()
+        curr = @levels[@currentLevel]
+        curr.render()
         if @currentLevel > 0
           @finishLevel(@levels[@currentLevel - 1])
-        @levels[@currentLevel].show()
-        window.Overlay.setUrl("/docs/level#{ @currentLevel + 1 }.html")
+        curr.show()
+        window.overlay.setUrl("/docs/level#{ @currentLevel + 1 }.html")
+        window.overlay.activate()
+        if curr.chardinOverlay
+          window.dispatcher.trigger('chardinStart')
 
       end: ->
         @finishLevel(@levels[@currentLevel])
-        window.Overlay.setUrl('/docs/overlay.html')
-        window.Overlay.activate()
+        window.overlay.setUrl('/docs/overlay.html')
+        window.overlay.activate()
 
       finishLevel: (level) ->
-        @cost += level.cost
+        @cost.set(
+          amount: @cost.get('amount') + level.cost.get('amount')
+          explanation: level.cost.get('explanation')
+        )
         level.hide()
         level.destroy()
 
@@ -114,12 +131,16 @@ embodies a different task, a different facet of anxiety, or a different feature
 of depression in the hope that, taken together, they might describe a more
 complete and entire picture.
 
-    class Level
-      constructor: (@name, @cost) ->
+    class window.Level
+      constructor: (@name, @chardinOverlay, costAmount, costExplanation) ->
         @View = Backbone.View.extend(
           tagname: 'div'
           className: 'level'
           render: ->
+        )
+        @cost = new window.Cost(
+          amount: costAmount
+          explanation: costExplanation
         )
 
       addToGame: (@game, @levelNumber) ->
@@ -136,15 +157,16 @@ it.  However, documentation is important.  It helps the author and those who
 come after to more clearly understand intention.  That's at least one third of
 programming, right there.  Comprehension, intention, implementation.
 
-    window.Level = Level
-
 Create a new game and make it available to the browser - we can start it there.
 
-    window.Game = new Game()
+    window.game = new Game()
 
-    window.Overlay.setUrl('/docs/app.html')
+    window.overlay.setUrl('/docs/app.html')
 
-Okay.  Deep breath.
+    window.overlay.el.height($(document).height() * 0.8)
+    $('.level').height($(document).height() * 0.75)
+
+## Okay.  Deep breath.
 
 This overlay will show the written portion of the experience.  This comes
 interwoven with the code - literally, the story and the code share the same
@@ -163,4 +185,4 @@ project is serving for me: putting into words and actions those supremely
 liminal states.  As with those themes, death, self-harm, and suicide have their
 roles, however brief.
 
-    window.Overlay.activate()
+    window.overlay.activate(true)

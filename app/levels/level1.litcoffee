@@ -3,6 +3,13 @@
 
     class Level1 extends Level
       constructor: ->
-        super 'Obsession', 250
+        super 'Obsession', true, 250, "Psychiatrist (an hour's drive away)"
 
-    window.Game.addLevel new Level1()
+      complete: ->
+        # check if all numbers are filled in
+        if true #all filled in
+          super
+        else
+          alert "You're...you're not done yet, though..."
+
+    window.game.addLevel new Level1()

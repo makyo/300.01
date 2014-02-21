@@ -1,17 +1,19 @@
 # Library JS files - should already be minified, so don't include them in uglify
-LIBRARIES = node_modules/d3/d3.min.js node_modules/jquery/dist/jquery.min.js node_modules/underscore/underscore-min.js node_modules/backbone/backbone-min.js
+JSLIBRARIES = node_modules/d3/d3.min.js node_modules/jquery/dist/jquery.min.js node_modules/underscore/underscore-min.js node_modules/backbone/backbone-min.js lib/chardinjs.min.js
+CSSLIBRARIES = lib/chardinjs.css
 
 # Specify these in the proper order.
-FILES = src/logo.js src/overlay.js src/app.js src/levels/level1.js
+FILES = src/logo.js src/overlay.js src/dispatcher.js src/cost.js src/app.js src/levels/level1.js
 
 dist: build
 	rm -rf dist
 	mkdir dist
 	node_modules/uglify-js/bin/uglifyjs \
-		$(FILES) -m --screw-ie8 -o dist/_app.js
-	paste -s -d '\n' $(LIBRARIES) dist/_app.js > dist/app.js
+		$(FILES) -c -m --screw-ie8 -o dist/_app.js
+	node_modules/uglify-js/bin/uglifyjs \
+		$(JSLIBRARIES) dist/_app.js > dist/app.js
 	rm dist/_app.js
-	cp src/style.css dist
+	cat src/style.css $(CSSLIBRARIES) > dist/style.css
 	sed -En '1h;1!H;$${g;s/<!--devel:css-->.*<!--prod(.*)\/prod-->.*<!--\/devel:css-->/\1/g;p;}' index.html |\
 		sed -En '1h;1!H;$${g;s/<!--devel:js-->.*<!--prod(.*)\/prod-->.*<!--\/devel:js-->/\1/g;p;}' > dist/index.html
 	cp -R docs dist
