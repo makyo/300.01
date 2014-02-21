@@ -11,12 +11,12 @@ of that is available in the game itself through an overlay.
 ## Acknowledgements
 
 * Libraries
-    * Backbone
-    * Chardin.js
-    * (Literate) CoffeeScript
-    * D3
-    * JQuery
-    * Underscore
+    * [Backbone](http://backbonejs.org/)
+    * [Chardin.js](https://github.com/heelhook/chardin.js)
+    * [(Literate) CoffeeScript](http://coffeescript.org/)
+    * [D3](http://d3js.org/)
+    * [JQuery](http://jquery.com/)
+    * [Underscore](http://underscorejs.org)
 * People
     * J.C.
     * R.R.
@@ -26,4 +26,4 @@ of that is available in the game itself through an overlay.
     * K.B.
     * K.S.
     * G.P.
-    * &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588; &#x2588;. &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;, M.D.
+    * Dr. &#x2588;.&#x2588;.
