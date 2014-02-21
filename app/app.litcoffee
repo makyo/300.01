@@ -59,7 +59,21 @@ Generalized anxiety disorder and bipolar I disorder.
 
 ## Our game
 
-(describe the game)
+This is a game, but also a little bit more.
+
+This is a game about the experience of dealing with mental illness,
+specifically generalized anxiety disorder and bipolar I disorder.
+
+This is not a game, it's a description of an experience.  One that I've gone
+through, sure, but also one that's hopefully loose-woven enough to fit the
+experiences of many.
+
+This is not a game, it's a therapeutic tool to help me figure out and describe
+the ways in which my anxiety, panic, and depression affect my life, as well as
+a teaching-aid for others to learn about the same.
+
+This is a game, and also not a game; it's a mixed-media art-form consisting of
+written works and simple user interactions styled along the lines of a game.
 
     class Game
       constructor: ->
@@ -91,7 +105,14 @@ Generalized anxiety disorder and bipolar I disorder.
 
 ## A level within the game
 
-(describe the stages of treatment, etc.)
+There's little room for the concept of levels in a game that's not a game but
+also maybe a game of some sort.  Even so, in order to make this a more
+manageable task for me to work on - both in the sense of completing specific
+portions of it, as well as giving myself the mental space to deal with
+difficult topics - 300.01 is divided up into discrete levels, each of which
+embodies a different task, a different facet of anxiety, or a different feature
+of depression in the hope that, taken together, they might describe a more
+complete and entire picture.
 
     class Level
       constructor: (@name, @cost) ->
@@ -109,7 +130,11 @@ Generalized anxiety disorder and bipolar I disorder.
         else
           @game.next()
 
-Make the Level class available outside this file for subclassing
+Make the Level class available outside this file for subclassing.  I know
+little about how much all of this will mean to you, the one who is looking at
+it.  However, documentation is important.  It helps the author and those who
+come after to more clearly understand intention.  That's at least one third of
+programming, right there.  Comprehension, intention, implementation.
 
     window.Level = Level
 
@@ -118,4 +143,24 @@ Create a new game and make it available to the browser - we can start it there.
     window.Game = new Game()
 
     window.Overlay.setUrl('/docs/app.html')
+
+Okay.  Deep breath.
+
+This overlay will show the written portion of the experience.  This comes
+interwoven with the code - literally, the story and the code share the same
+file.  This helps me pull together a more cohesive experience, or at least lets
+me put this down in more than just words.  Once you've read (or not) the
+written portion of each level, close the overlay by clicking the 'X' in the
+upper right corner.  After that, the level itself will be exposed, and you will
+be given a task.  Each level comes at a cost, and there's no avoiding that.
+Some levels can be buried, skipped.  Others must be completed before you can
+move on.  There really is no way around it.
+
+I know and understand the affect that anxiety and mood triggers can have, and
+so here is your fair trigger warning: this is a game about anxiety and
+depression.  Those really are the only themes, because that's the purpose this
+project is serving for me: putting into words and actions those supremely
+liminal states.  As with those themes, death, self-harm, and suicide have their
+roles, however brief.
+
     window.Overlay.activate()

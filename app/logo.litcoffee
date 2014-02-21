@@ -33,7 +33,7 @@ forward, all told.
 
 Logotype is neat and all, but add in some randomness (but just some).
 
-    lineFn = _.throttle(() ->
+    setInterval(() ->
       startY = _.random(10, 75)
       moveUp = _.random(1, 2) % 2 == 0
       logo.append('line')
@@ -44,11 +44,8 @@ Logotype is neat and all, but add in some randomness (but just some).
           y2: startY
         )
       .transition()
-        .duration(_.random(1000, 10000))
+        .duration(_.random(1000, 5000))
         .attr('y1', if moveUp then 10 else 78)
         .attr('y2', if moveUp then 10 else 78)
         .remove()
-      _.defer(lineFn)
-    , 250)
-
-    lineFn()
+    , 500)

@@ -26,6 +26,9 @@
     width: 80%;
     height: 80%;
     display: none;
+    -moz-box-shadow: 6px 6px 5px 0px #ccc;
+    -webkit-box-shadow: 6px 6px 5px 0px #ccc;
+    box-shadow: 6px 6px 5px 0px #ccc;
     &.active {
         display: block;
     }
@@ -36,7 +39,7 @@
     }
     .close {
         position: absolute;
-        top: -10px;
+        top: -11px;
         right: -10px;
         background-color: #888;
         color: #fff;
@@ -44,6 +47,7 @@
         height: 20px;
         border-radius: 10px;
         text-align: center;
+        padding-top: 2px;
         cursor: pointer;
     }
 }
