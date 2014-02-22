@@ -87,9 +87,6 @@ written works and simple user interactions styled along the lines of a game.
           el: '#cost'
           model: @cost
         )
-        $('#complete-level').click(_.bind(() ->
-          @levels[@currentLevel].complete()
-        , this))
 
       addLevel: (level) ->
         level.addToGame(this, @levels.length)
@@ -133,11 +130,7 @@ complete and entire picture.
 
     class window.Level
       constructor: (@name, @chardinOverlay, costAmount, costExplanation) ->
-        @View = Backbone.View.extend(
-          tagname: 'div'
-          className: 'level'
-          render: ->
-        )
+        $('.level').html('')
         @cost = new window.Cost(
           amount: costAmount
           explanation: costExplanation
@@ -150,6 +143,15 @@ complete and entire picture.
           @game.end()
         else
           @game.next()
+
+      render: ->
+
+      show: ->
+        $('#title').text(@name)
+
+      hide: ->
+
+      destroy: ->
 
 Make the Level class available outside this file for subclassing.  I know
 little about how much all of this will mean to you, the one who is looking at
@@ -186,3 +188,11 @@ liminal states.  As with those themes, death, self-harm, and suicide have their
 roles, however brief.
 
     window.overlay.activate(true)
+
+    $('#complete-level').click(() ->
+      if window.game.currentLevel == -1
+        window.game.next()
+        $(this).html('Complete Level')
+      else
+        window.game.levels[window.game.currentLevel].complete()
+    )
