@@ -15,6 +15,7 @@ of that is available in the game itself through an overlay.
     * [Chardin.js](https://github.com/heelhook/chardin.js)
     * [(Literate) CoffeeScript](http://coffeescript.org/)
     * [D3](http://d3js.org/)
+    * [Docco](http://jashkenas.github.io/docco/)
     * [JQuery](http://jquery.com/)
     * [Underscore](http://underscorejs.org)
 * People
