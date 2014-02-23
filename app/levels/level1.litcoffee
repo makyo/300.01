@@ -24,7 +24,7 @@ Do not worry about what you see.
     class Level1 extends Level
       constructor: ->
         @currNumber = 1
-        super 'Obsessioni over completeness', true, 250, "Psychiatrist (an hour's drive away)"
+        super '1. Obsession over completeness', true, 250, "Psychiatrist (an hour's drive away)"
 
       render: ->
         $('.level').text "Please enter the numbers as they appear on the screen: "
@@ -90,9 +90,15 @@ Do not worry about what you see.
           .duration @currentDuration
           .style 'opacity', 0
           .each 'end', () =>
+            if @currNumberString == ''
+              _.defer =>
+                d3.selectAll '.currNumber'
+                  .remove()
+                @startTimer()
         $ '#input'
           .on 'keypress.comeOn', (evt) =>
-            if @onKeyPress(evt)
+            result = @onKeyPress(evt)
+            if result == 1
               now = _.now()
               diff = now - @lastEventTime
               quartile = @currentDuration / 4
@@ -102,6 +108,8 @@ Do not worry about what you see.
                 @tooLate()
               else
                 @onTime()
+            else if result == 0
+              @restart()
 
 All you need to do, really, is type the nubers as they come up on the screen.
 
@@ -111,14 +119,17 @@ All you need to do, really, is type the nubers as they come up on the screen.
         if 9 >= currKeyPress >= 0
           @currNumberString += "#{ currKeyPress }"
           if parseInt(@currNumberString) == @currNumber
-            return true
+            return 1
           else
             if parseInt(@currNumberString) > @currNumber
               $('#input').val ''
               @currNumberString = ''
-            return false
+              return 0
+            else
+              return -1
         else
           evt.preventDefault()
+          return 0
 
 Gotta be a little faster on the draw...
 
@@ -128,13 +139,13 @@ Gotta be a little faster on the draw...
           $ "[data-number=#{ @currNumber }]"
             .text ''
           @corruptElements()
-        _.delay @startTimer, (_.now() - @lastEventTime - @currentDuration) * -1
+        @restart()
 
 Okay, no, but really, not that fast...
 
       tooSoon: () ->
         @corruptElements()
-        _.delay @startTimer, (_.now() - @lastEventTime - @currentDuration) * -1
+        @restart()
 
 See, you have a window of opportunity to sate that feeling, get rid of that
 stench of ritual, the acrid tang of omen and portent...
@@ -144,6 +155,9 @@ stench of ritual, the acrid tang of omen and portent...
         $ "[data-number=#{ @currNumber }]"
           .text @currNumber
         @currNumber++
+        @restart()
+
+      restart: () ->
         _.delay @startTimer, (_.now() - @lastEventTime - @currentDuration) * -1
 
 The longer you go on, the more likely you are to see corruption.  It's like a
@@ -153,16 +167,15 @@ do is find a way to scrape some of that off, just for a little bit, by finding
 the right course of action to fill that need.
 
       corruptElements: () ->
-        debugger
         (@corruptElement($("[data-number=#{ d }]")) for d in [1..@currNumber])
 
       corruptElement: (element) ->
         if not (_.random(1, 100) <= @currNumber * 2)
           return
-        direction = _.random(1, 7)
+        direction = _.random(1, 10)
         corruptions = []
         switch
-          when direction in [1, 4]
+          when direction in [1, 4, 7]
             corruptions = [
               '\u030d', '\u030e', '\u0304', '\u0305', '\u033f', '\u0311',
               '\u0306', '\u0310', '\u0352', '\u0357', '\u0351', '\u0307',
@@ -174,7 +187,8 @@ the right course of action to fill that need.
               '\u036c', '\u036d', '\u036e', '\u036f', '\u033e', '\u035b',
               '\u0346', '\u031a'
             ]
-          when chance in [2, 5]
+            @corruptColor element, "r"
+          when direction in [2, 5, 8]
             corruptions = [
               '\u0316', '\u0317', '\u0318', '\u0319', '\u031c', '\u031d',
               '\u031e', '\u031f', '\u0320', '\u0324', '\u0325', '\u0326',
@@ -184,18 +198,28 @@ the right course of action to fill that need.
               '\u0349', '\u034d', '\u034e', '\u0353', '\u0354', '\u0355',
               '\u0356', '\u0359', '\u035a', '\u0323'
             ]
-          when chance in [3, 6]
+            @corruptColor element, "g"
+          when direction in [3, 6, 9]
             corruptions = [
               '\u0315', '\u031b', '\u0340', '\u0341', '\u0358', '\u0321',
               '\u0322', '\u0327', '\u0328', '\u0334', '\u0335', '\u0336',
               '\u034f', '\u035c', '\u035d', '\u035e', '\u035f', '\u0360',
               '\u0362', '\u0338', '\u0337', '\u0361', '\u0489'
             ]
+            @corruptColor element, "b"
           else
-            @element.html '&#x2588'
+            if _.random(1, 3) == 1
+              element.html '&#x2588'
             return
         corruption = _.sample(corruptions)
-        element.text(element.text() + corruption)
+        text = element.text().split ''
+        text.splice _.random(1, text.length), 0, corruption
+        element.text text.join('')
+
+      corruptColor: (element, rgb) ->
+        color = d3.rgb element.css('color')
+        color[rgb] =  Math.min(color[rgb] + _.random(1, 127), 127)
+        element.css 'color', color.toString()
 
 Ready?  Once we get started by closing this overlay, all you need to do is hit
 any key, then write the numbers 1 through 100. 

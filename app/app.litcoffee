@@ -96,9 +96,12 @@ written works and simple user interactions styled along the lines of a game.
         curr.render()
         if @currentLevel > 0
           @finishLevel @levels[@currentLevel - 1]
+        # XXX Maybe this should go after overlay is closed
         curr.show()
+        $('#title').text curr.name
         window.overlay.setUrl "/docs/level#{ @currentLevel + 1 }.html"
         window.overlay.activate()
+        # XXX This should definitely happen after overlay is closed
         if curr.chardinOverlay
           window.dispatcher.trigger 'chardinStart'
 
