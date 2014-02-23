@@ -48,4 +48,7 @@ and the story - should be told, even if only for my personal benefit.
         @el.removeClass 'active'
         window.dispatcher.trigger 'overlayClosed'
 
+All source for this game is available on
+[Github](https://github.com/makyo/300.01).
+
     window.overlay = new Overlay $('#overlay')
