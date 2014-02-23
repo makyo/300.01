@@ -79,41 +79,38 @@ written works and simple user interactions styled along the lines of a game.
       constructor: ->
         @currentLevel = -1
         @levels = []
-        @cost = new window.Cost(
+        @cost = new window.Cost
           amount: 0
           explanation: "None of this is free, you understand..."
-        )
-        @costView = new window.CostView(
+        @costView = new window.CostView
           el: '#cost'
           model: @cost
-        )
 
       addLevel: (level) ->
-        level.addToGame(this, @levels.length)
-        @levels.push(level)
+        level.addToGame this, @levels.length
+        @levels.push level
 
       next: ->
         @currentLevel++
         curr = @levels[@currentLevel]
         curr.render()
         if @currentLevel > 0
-          @finishLevel(@levels[@currentLevel - 1])
+          @finishLevel @levels[@currentLevel - 1]
         curr.show()
-        window.overlay.setUrl("/docs/level#{ @currentLevel + 1 }.html")
+        window.overlay.setUrl "/docs/level#{ @currentLevel + 1 }.html"
         window.overlay.activate()
         if curr.chardinOverlay
-          window.dispatcher.trigger('chardinStart')
+          window.dispatcher.trigger 'chardinStart'
 
       end: ->
-        @finishLevel(@levels[@currentLevel])
-        window.overlay.setUrl('/docs/overlay.html')
+        @finishLevel @levels[@currentLevel]
+        window.overlay.setUrl '/docs/overlay.html'
         window.overlay.activate()
 
       finishLevel: (level) ->
-        @cost.set(
+        @cost.set
           amount: @cost.get('amount') + level.cost.get('amount')
-          explanation: level.cost.get('explanation')
-        )
+          explanation: level.cost.get 'explanation'
         level.hide()
         level.destroy()
 
@@ -130,11 +127,11 @@ complete and entire picture.
 
     class window.Level
       constructor: (@name, @chardinOverlay, costAmount, costExplanation) ->
-        $('.level').html('')
-        @cost = new window.Cost(
+        $('.level').html ''
+        @cost = new window.Cost
           amount: costAmount
           explanation: costExplanation
-        )
+        @levelComplete = false
 
       addToGame: (@game, @levelNumber) ->
 
@@ -147,7 +144,7 @@ complete and entire picture.
       render: ->
 
       show: ->
-        $('#title').text(@name)
+        $('#title').text @name
 
       hide: ->
 
@@ -163,10 +160,10 @@ Create a new game and make it available to the browser - we can start it there.
 
     window.game = new Game()
 
-    window.overlay.setUrl('/docs/app.html')
+    window.overlay.setUrl '/docs/app.html'
 
-    window.overlay.el.height($(document).height() * 0.8)
-    $('.level').height($(document).height() * 0.75)
+    window.overlay.el.height $(document).height() * 0.8
+    $('.level').height $(document).height() * 0.75
 
 ## Okay.  Deep breath.
 
@@ -189,10 +186,9 @@ roles, however brief.
 
     window.overlay.activate(true)
 
-    $('#complete-level').click(() ->
+    $('#complete-level').click () ->
       if window.game.currentLevel == -1
         window.game.next()
-        $(this).html('Complete Level')
+        $(this).html 'Complete Level'
       else
         window.game.levels[window.game.currentLevel].complete()
-    )

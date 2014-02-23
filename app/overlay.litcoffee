@@ -27,20 +27,25 @@ and the story - should be told, even if only for my personal benefit.
       constructor: (@el) ->
         @active = false
         @url = ''
-        @el.find('.close').first().on('click', _.bind(@deactivate, this))
+        $ '.close'
+          .first()
+          .on 'click', _.bind(@deactivate, this)
 
       setUrl: (@url) ->
-        @el.find('iframe').first().attr src: @url
+        $ 'iframe'
+          .first()
+          .attr
+            src: @url
 
       toggle: () ->
         if @active then @deactivate() else @activate()
 
       activate: () ->
         @el.addClass 'active'
-        window.dispatcher.trigger('overlayOpened')
+        window.dispatcher.trigger 'overlayOpened'
 
       deactivate: () ->
         @el.removeClass 'active'
-        window.dispatcher.trigger('overlayClosed')
+        window.dispatcher.trigger 'overlayClosed'
 
-    window.overlay = new Overlay($('#overlay'))
+    window.overlay = new Overlay $('#overlay')

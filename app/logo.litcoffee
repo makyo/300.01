@@ -18,44 +18,41 @@ Being seen as In Control is certainaly desirable; being able to relinquish
 control where it never existed in the first place is certainly a good step
 forward, all told.
 
-    logo = d3.select('#logo').append('g')
+    logo = d3.select '#logo'
+      .append 'g'
 
-    logo.append('rect')
-      .attr(
+    logo.append 'rect'
+      .attr
         x: 0
         y: 0
         width: 275
         height: 100
         fill: '#fff'
-      )
 
-    logo.append('text')
-      .attr(
+    logo.append 'text'
+      .attr
         x: 0
         y: 75
         height: '100px'
-      )
-      .text('300.01')
-      .on('click', () ->
-        window.Overlay.setUrl('/docs/logo.html')
+      .text '300.01'
+      .on 'click', () ->
+        window.Overlay.setUrl '/docs/logo.html'
         window.Overlay.activate()
-      )
 
 Logotype is neat and all, but add in some randomness (but just some).
 
-    setInterval(() ->
-      startY = _.random(10, 75)
+    setInterval () ->
+      startY = _.random 10, 75
       moveUp = _.random(1, 2) % 2 == 0
-      logo.append('line')
-        .attr(
+      logo.append 'line'
+        .attr
           x1: 0
           x2: 275
           y1: startY
           y2: startY
-        )
       .transition()
-        .duration(_.random(1000, 5000))
-        .attr('y1', if moveUp then 10 else 78)
-        .attr('y2', if moveUp then 10 else 78)
+        .duration _.random(1000, 5000)
+        .attr 'y1', if moveUp then 10 else 78
+        .attr 'y2', if moveUp then 10 else 78
         .remove()
-    , 500)
+    , 500
