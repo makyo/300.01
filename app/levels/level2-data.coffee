@@ -147,8 +147,10 @@ Alright.
 
 ###
 
-text = 1, next = 2, para = 3
-theStory =
+text = 1
+next = 2
+para = 3
+theStory = [
   # TODO example text for now
   # Type (text, make next level appear, paragraph), Level, Text
   # levels should always increase after each next, except for 0, which will be the base story
@@ -162,4 +164,4 @@ theStory =
   [para]
   [text, 0, "So anyway, there I was..."]
   [next, 2]
-
+  ]
