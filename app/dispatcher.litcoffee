@@ -8,9 +8,9 @@
       $('#content').chardinJs('stop')
     )
 
-    window.dispatcher.on('overlayClosed', _.once(() ->
+    window.dispatcher.once('overlayClosed', () ->
       window.dispatcher.trigger('chardinStart')
-    ))
+    )
 
     window.dispatcher.on('overlayOpened', () ->
       window.dispatcher.trigger('chardinStop')

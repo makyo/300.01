@@ -11,7 +11,7 @@ Exactly.
         super 'Obsession over fractal detail', true, 200, 'A new prescription when Clonazepam does not work out.'
 
       render: ->
-        # TODO draw the paragraphs, each text bit wrapped in a span with the level indicated in class; hide everything not level 0
+        # TODO draw the paragraphs, each text bit wrapped in a span with the level and index indicated in class; hide everything not level 0
         return
 
       complete: ->

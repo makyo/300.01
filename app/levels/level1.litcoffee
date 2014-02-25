@@ -32,10 +32,8 @@ Do not worry about what you see.
         $('#input').focus()
         $('#input').blur () -> this.focus
         vis = d3.select '.level'
+          .attr 'class', 'level level1'
           .append 'table'
-          .style
-            width: '100%'
-            height: '100%'
         
         vis.selectAll 'tr'
           .data [0..9]
@@ -46,10 +44,7 @@ Do not worry about what you see.
             (r + d * 10 for r in [1..10])
           .enter()
           .append 'td'
-          .style
-            width: '10%'
-            height: '10%'
-          .attr 'data-number', (d) -> d
+          .attr 'id', (d) -> "numbercell-#{ d }"
         @currNumberTop = $(document).height() / 2 - 75
         @currNumberLeft = $(document).width() / 2 - 150
         @startTimer()
@@ -78,14 +73,8 @@ Do not worry about what you see.
           .attr 'class', 'currNumber'
           .text @currNumber
           .style
-            position: 'absolute'
-            width: '300px'
-            height: '300px'
             top: "#{ @currNumberTop }px"
             left: " #{ @currNumberLeft }px"
-            'text-align': 'center'
-            font: '150px "Walter Turncoat"'
-            opacity: 1
           .transition()
           .duration @currentDuration
           .style 'opacity', 0
@@ -136,7 +125,7 @@ Gotta be a little faster on the draw...
       tooLate: () ->
         if @currNumber > 1
           @currNumber--
-          $ "[data-number=#{ @currNumber }]"
+          $ "#numbercell-#{ @currNumber }"
             .text ''
           @corruptElements()
         @restart()
@@ -152,7 +141,7 @@ stench of ritual, the acrid tang of omen and portent...
 
       onTime: () ->
         @corruptElements()
-        $ "[data-number=#{ @currNumber }]"
+        $ "#numbercell-#{ @currNumber }"
           .text @currNumber
         @currNumber++
         @restart()
@@ -167,15 +156,15 @@ do is find a way to scrape some of that off, just for a little bit, by finding
 the right course of action to fill that need.
 
       corruptElements: () ->
-        (@corruptElement($("[data-number=#{ d }]")) for d in [1..@currNumber])
+        (@corruptElement($("#numbercell-#{ d }")) for d in [1..@currNumber])
 
       corruptElement: (element) ->
-        if not (_.random(1, 100) <= @currNumber * 2)
+        chance = _.random(1, 100)
+        if not (chance <= @currNumber)
           return
-        direction = _.random(1, 10)
         corruptions = []
         switch
-          when direction in [1, 4, 7]
+          when chance % 3 == 0
             corruptions = [
               '&#x30d;', '&#x30e;', '&#x304;', '&#x305;', '&#x33f;', '&#x311;',
               '&#x306;', '&#x310;', '&#x352;', '&#x357;', '&#x351;', '&#x307;',
@@ -187,8 +176,8 @@ the right course of action to fill that need.
               '&#x36c;', '&#x36d;', '&#x36e;', '&#x36f;', '&#x33e;', '&#x35b;',
               '&#x346;', '&#x31a;'
             ]
-            @corruptColor element, "r"
-          when direction in [2, 5, 8]
+            @corruptColor element, "r", chance
+          when chance % 5 == 0
             corruptions = [
               '&#x316;', '&#x317;', '&#x318;', '&#x319;', '&#x31c;', '&#x31d;',
               '&#x31e;', '&#x31f;', '&#x320;', '&#x324;', '&#x325;', '&#x326;',
@@ -198,27 +187,26 @@ the right course of action to fill that need.
               '&#x349;', '&#x34d;', '&#x34e;', '&#x353;', '&#x354;', '&#x355;',
               '&#x356;', '&#x359;', '&#x35a;', '&#x323;'
             ]
-            @corruptColor element, "g"
-          when direction in [3, 6, 9]
+            @corruptColor element, "g", chance
+          when chance % 7 == 0
             corruptions = [
               '&#x315;', '&#x31b;', '&#x340;', '&#x341;', '&#x358;', '&#x321;',
               '&#x322;', '&#x327;', '&#x328;', '&#x334;', '&#x335;', '&#x336;',
               '&#x34f;', '&#x35c;', '&#x35d;', '&#x35e;', '&#x35f;', '&#x360;',
               '&#x362;', '&#x338;', '&#x337;', '&#x361;', '&#x489;'
             ]
-            @corruptColor element, "b"
-          else
-            if _.random(1, 3) == 1
-              element.html '&#x2588'
+            @corruptColor element, "b", chance
+          when chance % 11 == 0
+            element.html '&#x2588'
             return
         corruption = _.sample(corruptions)
         text = element.text().split ''
         text.splice _.random(1, text.length), 0, corruption
         element.html text.join('')
 
-      corruptColor: (element, rgb) ->
+      corruptColor: (element, rgb, chance) ->
         color = d3.rgb element.css('color')
-        color[rgb] =  Math.min(color[rgb] + _.random(1, 127), 127)
+        color[rgb] =  Math.min(color[rgb] + chance, 255)
         element.css 'color', color.toString()
 
 Ready?  Once we get started by closing this overlay, all you need to do is hit

@@ -5,6 +5,9 @@ CSSLIBRARIES = lib/chardinjs.css
 # Specify these in the proper order.
 FILES = src/logo.js src/overlay.js src/dispatcher.js src/cost.js src/app.js src/levels/level1.js
 
+deploy: dist
+	scp -r dist/* makyo@mjs-svc.com:300.01.drab-makyo.com/
+
 dist: build
 	rm -rf dist
 	mkdir dist
@@ -36,4 +39,4 @@ docco: node_modules
 node_modules:
 	npm install
 
-.PHONY: build coffee devel dist docco less
+.PHONY: build coffee deploy devel dist docco less

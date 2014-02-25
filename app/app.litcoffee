@@ -96,14 +96,14 @@ written works and simple user interactions styled along the lines of a game.
         curr.render()
         if @currentLevel > 0
           @finishLevel @levels[@currentLevel - 1]
-        # XXX Maybe this should go after overlay is closed
-        curr.show()
         $('#title').text curr.name
         window.overlay.setUrl "/docs/level#{ @currentLevel + 1 }.html"
         window.overlay.activate()
-        # XXX This should definitely happen after overlay is closed
-        if curr.chardinOverlay
-          window.dispatcher.trigger 'chardinStart'
+        window.dispatcher.once('overlayClosed', () ->
+          curr.show()
+          if curr.chardinOverlay
+            window.dispatcher.trigger 'chardinStart'
+        )
 
       end: ->
         @finishLevel @levels[@currentLevel]
@@ -148,10 +148,13 @@ complete and entire picture.
 
       show: ->
         $('#title').text @name
+        $('.level').show()
 
       hide: ->
+        $('.level').hide()
 
       destroy: ->
+        $('.level').html ''
 
 Make the Level class available outside this file for subclassing.  I know
 little about how much all of this will mean to you, the one who is looking at
