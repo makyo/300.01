@@ -6,12 +6,17 @@ Write out the story as it appears.
 Exactly.
 
     class Level2 extends Level
-      constructor: ->
-        # TODO load the story? Otherwise, just include the source
-        super 'Obsession over fractal detail', true, 200, 'A new prescription when Clonazepam does not work out.'
+      constructor: (@story) ->
+        @currVisible = 0
+        super 'Obsession over fractal detail', true, 200, 'A suicide attempt, and a new prescription when Clonazepam does not work out.'
 
       render: ->
-        # TODO draw the paragraphs, each text bit wrapped in a span with the level and index indicated in class; hide everything not level 0
+        @textEl = $('.level').addClass 'level2'
+          .append '<p class="text"></p>'
+        _(@story).each((line) =>
+          classes = "textlevel-#{ line.level }#{ " hidden" if line.level > 0 }"
+          @textEl.append "<span class=\"#{ classes }\">#{ line.text }</span>  "
+        )
         return
 
       complete: ->
@@ -30,7 +35,7 @@ Exactly.
         # skip otherwise
 
       revealMore: () ->
-        # increment current level
-        # find all spans belonging to that level and make them visible/incomplete
+        @currVisible++
+        @textEl.find(".textlevel-#{ @currVisible }").show 'slow'
 
-    window.game.addLevel new Level2()
+    window.game.addLevel new Level2(window.aStoryAboutDogs)

@@ -76,8 +76,8 @@ This is a game, and also not a game; it's a mixed-media art-form consisting of
 written works and simple user interactions styled along the lines of a game.
 
     class Game
-      constructor: ->
-        @currentLevel = -1
+      constructor: (@hashEnabled) ->
+        @currentLevel = if @hashEnabled and window.location.hash then parseInt(window.location.hash.split('#')[1], 10) else -1
         @levels = []
         @cost = new window.Cost
           amount: 0
@@ -92,10 +92,12 @@ written works and simple user interactions styled along the lines of a game.
 
       next: ->
         @currentLevel++
-        curr = @levels[@currentLevel]
-        curr.render()
+        if @hashEnabled
+          window.location.hash = @currentLevel
         if @currentLevel > 0
           @finishLevel @levels[@currentLevel - 1]
+        curr = @levels[@currentLevel]
+        curr.render()
         $('#title').text curr.name
         window.overlay.setUrl "/docs/level#{ @currentLevel + 1 }.html"
         window.overlay.activate()
@@ -154,7 +156,7 @@ complete and entire picture.
         $('.level').hide()
 
       destroy: ->
-        $('.level').html ''
+        $('.level').removeClass().addClass('pure-u-1 level').html('')
 
 Make the Level class available outside this file for subclassing.  I know
 little about how much all of this will mean to you, the one who is looking at
@@ -164,7 +166,7 @@ programming, right there.  Comprehension, intention, implementation.
 
 Create a new game and make it available to the browser - we can start it there.
 
-    window.game = new Game()
+    window.game = new Game(window.useHash)
 
     window.overlay.setUrl '/docs/app.html'
 
@@ -197,4 +199,6 @@ roles, however brief.
         window.game.next()
         $(this).html 'Complete Level'
       else
+        if window.game.hashEnabled
+          window.game.levels[window.game.currentLevel].levelComplete = true
         window.game.levels[window.game.currentLevel].complete()
