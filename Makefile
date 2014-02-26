@@ -3,7 +3,7 @@ JSLIBRARIES = node_modules/d3/d3.min.js node_modules/jquery/dist/jquery.min.js n
 CSSLIBRARIES = lib/chardinjs.css
 
 # Specify these in the proper order.
-FILES = src/logo.js src/overlay.js src/dispatcher.js src/cost.js src/app.js src/levels/level1.js
+FILES = src/logo.js src/overlay.js src/dispatcher.js src/cost.js src/app.js src/levels/level1.js src/levels/level2-data.js src/levels/level2.js
 
 deploy: dist
 	scp -r dist/* makyo@mjs-svc.com:300.01.drab-makyo.com/
