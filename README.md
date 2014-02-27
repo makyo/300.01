@@ -28,6 +28,16 @@ files necessary in the dist/ directory.
 There are a few other make targets which really aren't that useful in day-to-day
 development, but feel free to check out the Makefile for more.
 
+## Contributing
+
+I aim to release this one level at a time.  Each level is exhausting to produce,
+and I burned too hard and too long to get the game itself and the first two
+levels done in just a few days.  However, I definitely welcome additions from
+others out there who might find this sort of thing useful.  Send a PR or shoot
+me an email - makyo@drab-makyo.com
+
+I'm also on [Gittip](https://www.gittip.com/makyo/)
+
 ## Acknowledgements
 
 * Libraries
