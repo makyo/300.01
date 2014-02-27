@@ -113,8 +113,23 @@ html, button, input, select, textarea,
     }
 
     &.level2 {
-        .hidden {
-            display: none;
+        .text {
+            .hidden {
+                display: none;
+            }
+            .line {
+                padding-right: 1em;
+                color: #aaa;
+            }
+            .complete {
+                color: #000;
+            }
+        }
+        #input {
+            margin: 1em auto;
+            width: 95%;
+            height: 50%;
+            display: block;
         }
     }
 }

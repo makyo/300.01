@@ -83,6 +83,8 @@ written works and simple user interactions styled along the lines of a game.
         @costView = new window.CostView
           el: '#cost'
           model: @cost
+        @cost.set 'amount', 0
+        @cost.set 'explanation', "None of this is free, you understand..."
 
       addLevel: (level) ->
         level.addToGame this, @levels.length
@@ -94,10 +96,11 @@ written works and simple user interactions styled along the lines of a game.
           @finishLevel @levels[@currentLevel - 1]
         else
           $('.chardin-help').remove()
-          @cost.set 'amount', 0
-          @cost.set 'explanation', "None of this is free, you understand..."
         curr = @levels[@currentLevel]
         curr.render()
+        @cost.set
+          amount: @cost.get('amount') + curr.cost.get('amount')
+          explanation: curr.cost.get 'explanation'
         $('#title').text curr.name
         window.overlay.setUrl "/docs/level#{ @currentLevel + 1 }.html"
         window.overlay.activate()
@@ -109,13 +112,11 @@ written works and simple user interactions styled along the lines of a game.
 
       end: ->
         @finishLevel @levels[@currentLevel]
+        $('#complete-level').remove()
         window.overlay.setUrl '/docs/overlay.html'
         window.overlay.activate()
 
       finishLevel: (level) ->
-        @cost.set
-          amount: @cost.get('amount') + level.cost.get('amount')
-          explanation: level.cost.get 'explanation'
         level.hide()
         level.destroy()
 
