@@ -104,7 +104,7 @@ Do not worry about what you see.
             else if result == 0
               @restart()
 
-All you need to do, really, is type the nubers as they come up on the screen.
+All you need to do, really, is type the numbers as they come up on the screen.
 
       onKeyPress: (evt) =>
         currKeyPress = evt.which - 48 *
@@ -155,7 +155,7 @@ stench of ritual, the acrid tang of omen and portent...
 
 The longer you go on, the more likely you are to see corruption.  It's like a
 thick layer of grease appended to the palms of your hands, spread out over your
-scapula, down over your flanks, on the backs of your kneeds.  All you need to
+scapula, down over your flanks, on the backs of your knees.  All you need to
 do is find a way to scrape some of that off, just for a little bit, by finding
 the right course of action to fill that need.
 

@@ -16,7 +16,7 @@ expression lest I have to testify as to what I feel to be the correctness of my
 actions.
 
 That's the point of the overlays.  Or, rather, that's the point of this attempt
-at using literate coffeescript to mix the mediums of written work and code, and
+at using literate CoffeeScript to mix the mediums of written work and code, and
 the overlays are the way in which I can make that visible to someone outside of
 the GitHub project.  It's a game, sure, but it's also an attempt to organize
 thoughts into a coherent story, following the history of a diagnosis and the

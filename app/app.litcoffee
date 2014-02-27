@@ -1,7 +1,9 @@
 300.01
 ======
 
-Generalized anxiety disorder and bipolar I disorder.
+This is your diagnosis.  Please read it very carefully.
+
+> Generalized anxiety disorder and bipolar I disorder.
 
     diagnosis = [ 300.01, 296.63 ]
 
