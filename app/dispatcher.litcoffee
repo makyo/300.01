@@ -1,4 +1,4 @@
-Dispatches from the land of imposter syndrome
+Dispatches from the land of impostor syndrome
 =============================================
 
 I can't believe this is the type of thing I spend my time doing.  I can't
@@ -11,6 +11,9 @@ believe there's anything to be gained from such a broken existence.  I can't
 believe there's anything within my life worth writing about.  I can't believe
 there's anything I've written worth reading, played worth listening to,
 programmed worth playing with.
+
+Being an impostor is when invalidation is confirmation.  Impostor syndrome is
+when everything is invalidation.
 
     window.dispatcher = _.clone(Backbone.Events)
 
