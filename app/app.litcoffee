@@ -76,12 +76,10 @@ This is a game, and also not a game; it's a mixed-media art-form consisting of
 written works and simple user interactions styled along the lines of a game.
 
     class Game
-      constructor: (@hashEnabled) ->
-        @currentLevel = if @hashEnabled and window.location.hash then parseInt(window.location.hash.split('#')[1], 10) else -1
+      constructor: (@fastForward) ->
+        @currentLevel = -1
         @levels = []
-        @cost = new window.Cost
-          amount: 0
-          explanation: "None of this is free, you understand..."
+        @cost = new window.Cost()
         @costView = new window.CostView
           el: '#cost'
           model: @cost
@@ -92,10 +90,12 @@ written works and simple user interactions styled along the lines of a game.
 
       next: ->
         @currentLevel++
-        if @hashEnabled
-          window.location.hash = @currentLevel
         if @currentLevel > 0
           @finishLevel @levels[@currentLevel - 1]
+        else
+          $('.chardin-help').remove()
+          @cost.set 'amount', 0
+          @cost.set 'explanation', "None of this is free, you understand..."
         curr = @levels[@currentLevel]
         curr.render()
         $('#title').text curr.name
@@ -166,7 +166,7 @@ programming, right there.  Comprehension, intention, implementation.
 
 Create a new game and make it available to the browser - we can start it there.
 
-    window.game = new Game(window.useHash)
+    window.game = new Game(window.devel)
 
     window.overlay.setUrl '/docs/app.html'
 
@@ -197,8 +197,10 @@ roles, however brief.
     $('#complete-level').click () ->
       if window.game.currentLevel == -1
         window.game.next()
-        $(this).html 'Complete Level'
+        d3.select('#complete-level')
+          .text "Complete Level"
+          .attr 'data-intro', "Click here when you're positive you've finished."
       else
-        if window.game.hashEnabled
+        if window.game.fastForward
           window.game.levels[window.game.currentLevel].levelComplete = true
         window.game.levels[window.game.currentLevel].complete()

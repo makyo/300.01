@@ -24,13 +24,14 @@ Do not worry about what you see.
     class Level1 extends Level
       constructor: ->
         @currNumber = 1
-        super '1. Obsession over completeness', true, 250, "Psychiatrist (an hour's drive away)"
+        super '1. Obsession over completeness', true, 250, "Psychiatrist
+          (an hour's drive away)"
 
       render: ->
-        $('.level').text "Please enter the numbers as they appear on the screen: "
-        $('.level').append '<input type="text" id="input" />'
+        $('.level').append '<input type="text" data-position="bottom"
+          data-intro="Enter numbers as they appear on the screen" id="input" />'
         $('#input').focus()
-        $('#input').blur () -> this.focus
+        $('#input').blur () -> this.focus()
         vis = d3.select '.level'
           .attr 'class', 'level level1'
           .append 'table'
@@ -47,9 +48,9 @@ Do not worry about what you see.
           .attr 'id', (d) -> "numbercell-#{ d }"
         @currNumberTop = $(document).height() / 2 - 75
         @currNumberLeft = $(document).width() / 2 - 150
-        @startTimer()
 
       show: ->
+        @startTimer()
         return
 
       complete: ->
@@ -70,7 +71,10 @@ Do not worry about what you see.
         @currentDuration = 2000 + _.random(-500, 500)
         d3.select '.level'
           .append 'div'
-          .attr 'class', 'currNumber'
+          .attr
+            'class': 'currNumber'
+            'data-intro': 'This number.  Here.'
+            'data-position': 'left'
           .text @currNumber
           .style
             top: "#{ @currNumberTop }px"

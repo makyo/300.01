@@ -88,6 +88,7 @@ Please make checks payable to:
         return
 
       render: () =>
-        @$el.text d3.format('$,.2f')(@model.get('amount'))
-        @$el.data 'intro', @model.get('explanation')
+        d3.select(@el)
+          .text d3.format('$,.2f')(@model.get('amount'))
+          .attr 'data-intro', @model.get('explanation')
         return
