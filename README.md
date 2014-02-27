@@ -39,12 +39,12 @@ development, but feel free to check out the Makefile for more.
     * [JQuery](http://jquery.com/)
     * [Underscore](http://underscorejs.org)
 * People
-    * J.C.
+    * J.C&#x30d;.
     * R.R.
-    * C.M.
-    * J.C.
-    * K.K.
-    * K.B.
-    * K.S.
-    * G.P.
+    * C&#x330;&#x334;.M.
+    * J.C&#x359;.
+    * K&#x302;.K&#x341;.
+    * K&#x342;&#x307;.B&#x363;&#x32a;&#x35d;.
+    * K&#x304;&#x360;&#x344;.S&#x309;&#x356;&#x321;&#x333;.
+    * G&#x313;&#x34c;&#x36b;&#x30f;.P&#x310;&#x309;&#x317;&#x337;&#x35f;.
     * Dr. &#x2588;.&#x2588;.
