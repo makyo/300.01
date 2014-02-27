@@ -40,6 +40,7 @@ Exactly.
             'data-position': 'bottom'
             'data-intro': '...in here.'
           .on 'keyup', => @check()
+        $('#input').focus()
         d3.select '#cost'
           .attr 'data-position', 'left'
         return
@@ -59,6 +60,7 @@ there's no way out but through.  You have to write out the story as it appears.
 Exactly.
 
       check: () ->
+        window.dispatcher.trigger 'chardinStop'
         currInputs = @inputEl.node().value.split  /\.\s*/
           .map (input) ->
             input.replace(/([\.\\\^\$\*\?\[\]\(\)])/g, "\\$1")

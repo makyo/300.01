@@ -107,6 +107,7 @@ Do not worry about what you see.
 All you need to do, really, is type the numbers as they come up on the screen.
 
       onKeyPress: (evt) =>
+        window.dispatcher.trigger 'chardinStop'
         currKeyPress = evt.which - 48 *
           (if evt.ctrlKey or evt.metaKey or evt.shiftKey or evt.altKey then 100 else 1)
         if 9 >= currKeyPress >= 0
