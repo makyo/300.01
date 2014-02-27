@@ -181,7 +181,7 @@ Create a new game and make it available to the browser - we can start it there.
 This overlay will show the written portion of the experience.  This comes
 interwoven with the code - literally, the story and the code share the same
 file.  This helps me pull together a more cohesive experience, or at least lets
-me put this down in more than just words.  Once you've read (or not) the
+me put this down in more than just words.  Once you've read (please do) the
 written portion of each level, close the overlay by clicking the 'X' in the
 upper right corner.  After that, the level itself will be exposed, and you will
 be given a task.  Each level comes at a cost, and there's no avoiding that.
