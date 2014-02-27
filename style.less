@@ -92,7 +92,11 @@ html, button, input, select, textarea,
 .level {
     border: 1px solid #eee;
 
-    &.level1 {
+    .level-inner {
+        height: 100%;
+    }
+
+    .level1 {
         #input {
             display: block;
             margin: auto;
@@ -111,14 +115,15 @@ html, button, input, select, textarea,
             height: 100%;
             td {
                 width: 10%;
-                height: 10%;
+                height: 9%;
                 text-align: center;
             }
         }
     }
 
-    &.level2 {
+    .level2 {
         .text {
+            padding: 0 1em;
             .hidden {
                 display: none;
             }
@@ -129,6 +134,9 @@ html, button, input, select, textarea,
             .complete {
                 color: #000;
             }
+        }
+        .input-wrapper {
+            height: 100%;
         }
         #input {
             margin: 1em auto;

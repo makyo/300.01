@@ -28,12 +28,12 @@ Do not worry about what you see.
           (an hour's drive away)"
 
       render: ->
-        $('.level').append '<input type="text" data-position="bottom"
+        $('.level .level-inner').append '<input type="text" data-position="bottom"
           data-intro="Enter numbers as they appear on the screen" id="input" />'
         $('#input').focus()
         $('#input').blur () -> this.focus()
-        vis = d3.select '.level'
-          .attr 'class', 'level level1'
+        vis = d3.select '.level .level-inner'
+          .classed 'level1', true
           .append 'table'
         
         vis.selectAll 'tr'
@@ -69,7 +69,7 @@ Do not worry about what you see.
         @currNumberString = ''
         @lastEventTime = _.now()
         @currentDuration = 2000 + _.random(-500, 500)
-        d3.select '.level'
+        d3.select '.level .level-inner'
           .append 'div'
           .attr
             'class': 'currNumber'

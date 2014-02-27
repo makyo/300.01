@@ -135,7 +135,6 @@ complete and entire picture.
 
     class window.Level
       constructor: (@name, @chardinOverlay, costAmount, costExplanation) ->
-        $('.level').html ''
         @cost = new window.Cost
           amount: costAmount
           explanation: costExplanation
@@ -153,13 +152,15 @@ complete and entire picture.
 
       show: ->
         $('#title').text @name
-        $('.level').show()
+        $('.level .level-inner').show()
 
       hide: ->
-        $('.level').hide()
+        $('.level .level-inner').hide()
 
       destroy: ->
-        $('.level').removeClass().addClass('pure-u-1 level').html('')
+        $('.level')
+          .height $(document).height() * 0.75
+          .html '<div class="level-inner"> </div>'
 
 Make the Level class available outside this file for subclassing.  I know
 little about how much all of this will mean to you, the one who is looking at

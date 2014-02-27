@@ -12,7 +12,7 @@ Exactly.
           and a new prescription when Clonazepam does not work out.'
 
       render: ->
-        @textEl = d3.select '.level'
+        @textEl = d3.select '.level .level-inner'
           .classed 'level2', true
           .append 'div'
           .classed 'pure-u-15-24', true
@@ -31,9 +31,9 @@ Exactly.
               id: line.id
             .text line.text
         )
-        @inputEl = d3.select '.level'
+        @inputEl = d3.select '.level .level-inner'
           .append 'div'
-          .classed 'pure-u-1-3', true
+          .classed 'pure-u-1-3 input-wrapper', true
           .append 'textarea'
           .attr
             id: 'input'
