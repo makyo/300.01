@@ -74,6 +74,8 @@ Exactly.
                   line.complete = true
                   d3.select "##{ line.id }"
                     .classed "complete", true
+                  if _.filter(@story, (d) -> ( d.complete )).length == @story.length
+                    @levelComplete = true
                   if line.next
                     @revealMore()
                 else if line.text.search(currInput) == 0
@@ -94,8 +96,7 @@ all consuming and unavoidable.  You have to write out the story as it appears.
 Exactly.  Precisely as it appears.
 
       revealMore: () ->
-        if _.filter(@story, (d) -> ( d.complete )).length == @story.length
-          @levelComplete = true
+        if @levelComplete
           return
         @currVisible++
         @textEl.selectAll ".textlevel-#{ @currVisible }"
